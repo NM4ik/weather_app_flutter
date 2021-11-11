@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-<<<<<<< HEAD
 import 'package:google_fonts/google_fonts.dart';
 
 class SettingsCardPageWidget extends StatefulWidget {
@@ -18,30 +17,10 @@ class _SettingsCardPageWidgetState extends State<SettingsCardPageWidget> {
     return Container(
         child: Padding(
           padding: const EdgeInsets.all(0), //fix paddings
-=======
-
-class SettingsCardPageWidget extends StatelessWidget {
-  const SettingsCardPageWidget({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Neumorphic(
-      style: NeumorphicStyle(
-        shape: NeumorphicShape.concave,
-        boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(12)),
-        depth: 3,
-        lightSource: LightSource.top,
-        color: Color(0xFFE2EBFF),
-      ),
-      child: Container(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0), //fix paddings
->>>>>>> 248b8163c38b80a8b74145754062eaaf9c38dd21
           child: Column(
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-<<<<<<< HEAD
                 children: [
                   Text("Температура", style: GoogleFonts.manrope(
                     fontWeight: FontWeight.w600,
@@ -116,17 +95,10 @@ class SettingsCardPageWidget extends StatelessWidget {
                     ),
                   )
                 ],
-=======
-                // children: [Text($title), switcher(),],
->>>>>>> 248b8163c38b80a8b74145754062eaaf9c38dd21
               ),
             ],
           ),
         ),
-<<<<<<< HEAD
-=======
-      ),
->>>>>>> 248b8163c38b80a8b74145754062eaaf9c38dd21
     );
   }
 }

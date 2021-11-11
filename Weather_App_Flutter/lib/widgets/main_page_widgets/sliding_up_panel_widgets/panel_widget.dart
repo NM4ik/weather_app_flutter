@@ -37,7 +37,6 @@ class _PanelWidgetState extends State<PanelWidget>
         Padding(
           padding: const EdgeInsets.fromLTRB(20, 10, 20, 16),
           child: Column(
-<<<<<<< HEAD
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
@@ -45,18 +44,6 @@ class _PanelWidgetState extends State<PanelWidget>
                 children: [
                   widget.isVisible ? SlidingUpDateWidget() : Container(),
                 ],
-=======
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(bottom: 32.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    widget.isVisible ? SlidingUpDateWidget() : Container(),
-                  ],
-                ),
->>>>>>> 248b8163c38b80a8b74145754062eaaf9c38dd21
               ),
               // Row(
               //   children: [

@@ -13,7 +13,6 @@ class SettingPage extends StatelessWidget {
       // backgroundColor: Colors.transparent,
       backgroundColor: Color(0xFFE2EBFF),
       appBar: AppBar(
-<<<<<<< HEAD
         title: Text(
           "Настройки",
           style: GoogleFonts.manrope(
@@ -29,22 +28,10 @@ class SettingPage extends StatelessWidget {
             ("assets/images/iconBack.svg"),
             color: Colors.black,
           ),
-=======
-        title: Text("Настройки", style: GoogleFonts.manrope(
-          fontWeight: FontWeight.w600,
-          fontSize: 20,
-          color: Colors.black,
-        ),),
-        backgroundColor: Color(0xFFE2EBFF),
-        elevation: 0,
-        leading: IconButton(
-          icon: SvgPicture.asset(("assets/images/iconBack.svg"), color: Colors.black,),
->>>>>>> 248b8163c38b80a8b74145754062eaaf9c38dd21
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
       body: Container(
-<<<<<<< HEAD
           color: Color(0xFFE2EBFF),
           child: Padding(
             padding: const EdgeInsets.only(top: 10.0),
@@ -87,27 +74,6 @@ class SettingPage extends StatelessWidget {
               ],
             ),
           )),
-=======
-        color: Color(0xFFE2EBFF),
-        child: Padding(
-          padding: const EdgeInsets.only(top: 10.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 20.0, bottom: 16),
-                child: Text("Единицы измерения", style: GoogleFonts.manrope(
-                  fontSize: 10,
-                  fontWeight: FontWeight.w600,
-                  color: Color(0xFF828282),
-                ),),
-              ),
-              SettingsCardPageWidget(),
-            ],
-          ),
-        )
-      ),
->>>>>>> 248b8163c38b80a8b74145754062eaaf9c38dd21
     );
   }
 }

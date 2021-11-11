@@ -11,11 +11,7 @@ class FullWeekButton extends StatelessWidget {
       duration: Duration(seconds: 3),
       curve: Curves.easeInOut,
       child: Padding(
-<<<<<<< HEAD
         padding: const EdgeInsets.all(30.0),
-=======
-        padding: const EdgeInsets.all(16.0),
->>>>>>> 248b8163c38b80a8b74145754062eaaf9c38dd21
         child: RaisedButton(
           color: Color(0xFFE2EBFF),
           textColor: Color(0xFF038CFE),
