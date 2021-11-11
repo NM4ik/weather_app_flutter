@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:weather_app_flutter/pages/settings_page.dart';
 import 'package:weather_app_flutter/pages/favorites_page.dart';
-import 'package:weather_app_flutter/pages/profile_page.dart';
+import 'package:weather_app_flutter/pages/about_app_page.dart';
 
 
 
@@ -33,7 +33,7 @@ void selectedItem(BuildContext context, int index){
       ));
       break;
     case 2:
-      Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProfilePage(),
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) => AboutAppPage(),
       ));
       break;
   }

@@ -3,7 +3,12 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SettingsCardPageWidget extends StatefulWidget {
-  const SettingsCardPageWidget({Key? key}) : super(key: key);
+  final String title;
+  final String unitMeasurementFirstValue;
+  final String unitMeasurementSecondValue;
+
+
+  const SettingsCardPageWidget({Key? key, required this.title, required this.unitMeasurementFirstValue, required this.unitMeasurementSecondValue,}) : super(key: key);
 
   @override
   State<SettingsCardPageWidget> createState() => _SettingsCardPageWidgetState();
@@ -11,6 +16,12 @@ class SettingsCardPageWidget extends StatefulWidget {
 
 class _SettingsCardPageWidgetState extends State<SettingsCardPageWidget> {
   var toggleIndex = 0;
+
+  get title => widget.title;
+  get unit1 => widget.unitMeasurementFirstValue;
+  get unit2 => widget.unitMeasurementSecondValue;
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +33,7 @@ class _SettingsCardPageWidgetState extends State<SettingsCardPageWidget> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Температура", style: GoogleFonts.manrope(
+                  Text('$title', style: GoogleFonts.manrope(
                     fontWeight: FontWeight.w600,
                     fontSize: 16,
                     color: Colors.black,
@@ -40,7 +51,7 @@ class _SettingsCardPageWidgetState extends State<SettingsCardPageWidget> {
                         ToggleElement(
                             background: Center(
                               child: Text(
-                                'м/с',
+                                '$unit1',
                                 style: GoogleFonts.manrope(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold,
@@ -50,7 +61,7 @@ class _SettingsCardPageWidgetState extends State<SettingsCardPageWidget> {
                             ),
                             foreground: Center(
                               child: Text(
-                                'м/с',
+                                '$unit1',
                                 style: GoogleFonts.manrope(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
@@ -61,7 +72,7 @@ class _SettingsCardPageWidgetState extends State<SettingsCardPageWidget> {
                         ToggleElement(
                           background: Center(
                             child: Text(
-                              'км/ч',
+                              '$unit2',
                               style: GoogleFonts.manrope(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
@@ -71,7 +82,7 @@ class _SettingsCardPageWidgetState extends State<SettingsCardPageWidget> {
                           ),
                           foreground: Center(
                             child: Text(
-                              'км/ч',
+                              '$unit2',
                               style: GoogleFonts.manrope(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,

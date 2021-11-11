@@ -61,12 +61,12 @@ class SettingPage extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 13),
                     child: Column(
-                      children: [
-                        SettingsCardPageWidget(),
+                      children: const [
+                        SettingsCardPageWidget(title: 'Температура', unitMeasurementFirstValue: '˚C', unitMeasurementSecondValue: '˚F'),
                         Padding(padding: EdgeInsets.symmetric(vertical: 7,), child: Divider(color: Colors.black, ),),
-                        SettingsCardPageWidget(),
+                        SettingsCardPageWidget(title: 'Сила ветра', unitMeasurementFirstValue: 'м/с', unitMeasurementSecondValue: 'км/ч'),
                         Padding(padding: EdgeInsets.symmetric(vertical: 7,), child: Divider(color: Colors.black,),),
-                        SettingsCardPageWidget(),
+                        SettingsCardPageWidget(title: 'Давление', unitMeasurementFirstValue: 'мм.рт.ст.', unitMeasurementSecondValue: 'гПа'),
                       ],
                     ),
                   ),

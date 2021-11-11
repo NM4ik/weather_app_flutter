@@ -37,7 +37,7 @@ class NavigationDrawerWidget extends StatelessWidget {
                           ),
                           SizedBox(height: 10,),
                           buildMenuItem(
-                            text: 'Профиль',
+                            text: 'О приложении',
                             icon: Icons.account_circle_outlined,
                             onClicked: () => selectedItem(context, 2),
                           ),
