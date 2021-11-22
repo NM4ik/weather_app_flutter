@@ -1,0 +1,24 @@
+import 'dart:convert';
+
+import 'package:http/http.dart' as http;
+import 'package:weather_app_flutter/api/models.dart';
+
+class DataService {
+  Future<WeatherResponse> getWeather(String city) async {
+    //api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
+
+    final queryParameters = {
+      'q': city,
+      'appid': '8b0e60ec97b1abd6e99ea1ca19e464bd',
+      'units': 'imperial',
+    };
+
+    final uri = Uri.https(
+        'api.openweathermap.org', '/data/2.5/weather', queryParameters);
+
+    final response = await http.get(uri);
+
+    final json = jsonDecode(response.body);
+    return WeatherResponse.fromJson(json);
+  }
+}
