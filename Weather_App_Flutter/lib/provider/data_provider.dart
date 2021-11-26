@@ -8,6 +8,7 @@ class LoadData with ChangeNotifier {
 
   Future<dynamic> loadData(CityName) async {
     final response = await _dataService.getWeather(CityName);
+    print(response);
     return response;
   }
 }

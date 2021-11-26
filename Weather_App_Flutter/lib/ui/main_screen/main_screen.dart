@@ -19,21 +19,25 @@ class _MainState extends State<Main> {
   final panelController = PanelController();
   late bool isVisible;
   late WeatherResponse response;
+  late Map response2;
 
   // final defaultCityName = 'Moscow';
   final defaultCityName = 'Sankt-Peterburg';
 
   final _dataService = DataService();
+  final _oneCallApi = OneCallApi();
 
   Future<dynamic> _loadData() async {
     response = await _dataService.getWeather(defaultCityName);
-    // setState(() {
-    //   _response = response;
-    // })
-    return response;
+
+    response2 = await _oneCallApi.getOneCall(30.2642, 59.8944);
+    print(response2);
+    print(response2['daily'][0]['temp']);
+    return response2;
   }
 
-  @override
+
+    @override
   Widget build(BuildContext context) {
     return FutureBuilder(
       // future: Future.delayed(const Duration(seconds: 3)),
