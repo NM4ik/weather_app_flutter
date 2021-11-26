@@ -4,7 +4,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class WeatherCard extends StatelessWidget {
-  const WeatherCard({Key? key}) : super(key: key);
+  const WeatherCard({Key? key, required this.response, required this.time})
+      : super(key: key);
+  final String response;
+  final String time;
 
   @override
   Widget build(BuildContext context) {
@@ -23,17 +26,24 @@ class WeatherCard extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("06:00", style: GoogleFonts.manrope(
-                color: Colors.black,
-                fontWeight: FontWeight.w400,
-                fontSize: 17
-              ),),
-              SvgPicture.asset(("assets/images/sun.svg"), width: 40,),
-              Text("14˚c", style: GoogleFonts.manrope(
-                  color: Colors.black,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 17
-              ),),
+              Text(
+                time,
+                style: GoogleFonts.manrope(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 17),
+              ),
+              SvgPicture.asset(
+                ("assets/images/sun.svg"),
+                width: 40,
+              ),
+              Text(
+                response,
+                style: GoogleFonts.manrope(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 17),
+              ),
             ],
           ),
         ),

@@ -4,9 +4,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:weather_app_flutter/api/data_sevice.dart';
 import 'package:weather_app_flutter/api/models.dart';
+import 'package:weather_app_flutter/ui/main_screen/main_screen.dart';
 
 class SearchPage extends StatefulWidget {
-  const SearchPage({Key? key}) : super(key: key);
+  const SearchPage({Key? key, required this.setCity}) : super(key: key);
+  final Function(String) setCity;
 
   @override
   State<SearchPage> createState() => _SearchPageState();
@@ -14,9 +16,6 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   final _cityTextController = TextEditingController();
-  final _dataService = DataService();
-
-  late WeatherResponse _response;
 
   @override
   Widget build(BuildContext context) {
@@ -66,8 +65,9 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   void _search() async{
-    // final response = await _dataService.getWeather(_cityTextController.text);
-    final response = await _dataService.getWeather(_cityTextController.text);
-    // setState(() => _response = response);
+    String cityName = _cityTextController.text;
+    widget.setCity(cityName);
+    Navigator.of(context).push(MaterialPageRoute
+      (builder: (context) => Main()));
   }
 }

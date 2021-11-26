@@ -5,13 +5,15 @@ import 'package:google_fonts/google_fonts.dart';
 
 
 class WeatherDetailCard extends StatelessWidget {
-  const WeatherDetailCard({Key? key}) : super(key: key);
-
+  const WeatherDetailCard({Key? key, required this.type, required this.response, required this.iconName}) : super(key: key);
+  final String type;
+  final String response;
+  final String iconName;
   @override
   Widget build(BuildContext context) {
     return Flexible(
       child: Neumorphic(
-        style: NeumorphicStyle(
+        style: const NeumorphicStyle(
           color: Color(0xFFE0E9FD),
           depth: 5,
           intensity: 0.4,
@@ -26,14 +28,20 @@ class WeatherDetailCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SvgPicture.asset(("assets/images/thermometer.svg"),),
-                Text("8", style: GoogleFonts.manrope(  //data quantity
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.black,
-                ),),
+                Padding(
+                  padding: const EdgeInsets.only(right: 2.0),
+                  child: SvgPicture.asset(("assets/images/$iconName"),),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 2),
+                  child: Text(response, style: GoogleFonts.manrope(  //data quantity
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black,
+                  ),),
+                ),
 
-                Text("˚c", style: GoogleFonts.manrope(  //signature for data
+                Text(type, style: GoogleFonts.manrope(  //signature for data
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
                   color: Color(0xFF5A5A5A),

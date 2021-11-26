@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:weather_app_flutter/ui/sliding_up_panel/widgets/weather_detail_card_widget.dart';
 
 class DetailWeatherElements extends StatelessWidget {
-  const DetailWeatherElements({Key? key}) : super(key: key);
+  const DetailWeatherElements({Key? key, required this.response}) : super(key: key);
+  final Map response;
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +17,9 @@ class DetailWeatherElements extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                WeatherDetailCard(),
+                WeatherDetailCard(response: response['current']['temp'].round().toString(), type: 'C', iconName: 'thermometer.svg',),
                 SizedBox(width: 20,),
-                WeatherDetailCard(),
+                WeatherDetailCard(response: response['current']['humidity'].round().toString(), type: '%', iconName: 'humidity.svg'),
               ],
             ),
             Padding(
@@ -26,9 +27,10 @@ class DetailWeatherElements extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  WeatherDetailCard(),
-                  SizedBox(width: 20,),
-                  WeatherDetailCard(),
+                  WeatherDetailCard(response: (response['current']['wind_speed'] * 0.514).round().toString(), type: 'м/c', iconName: 'wind_speed.svg'),
+                  // SizedBox(width: 20,),
+                  WeatherDetailCard(response: response['current']['pressure'].round().toString(), type: 'мм.рт.ст', iconName: 'pressure.svg'),
+
                 ],
               ),
             ),

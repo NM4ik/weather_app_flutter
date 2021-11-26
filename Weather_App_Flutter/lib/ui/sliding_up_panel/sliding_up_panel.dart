@@ -8,8 +8,9 @@ import 'package:provider/provider.dart';
 
 class SlidingUpPanelWidget extends StatefulWidget {
   final PanelController panelController;
+  final Map<String, dynamic> response;
 
-  const SlidingUpPanelWidget({Key? key, required this.panelController})
+  const SlidingUpPanelWidget({Key? key, required this.panelController, required this.response})
       : super(key: key);
 
   @override
@@ -41,6 +42,7 @@ class _SlidingUpPanelWidgetState extends State<SlidingUpPanelWidget> {
         context.read<isVisibleProvider>().panelOpen();
       },
       panelBuilder: (controller) => PanelWidget(
+        response: widget.response,
         controller: controller,
         isVisible: context.watch<isVisibleProvider>().isVisible,
       ),

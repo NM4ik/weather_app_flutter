@@ -7,9 +7,10 @@ import 'weather_card_detail_widget.dart';
 class PanelWidget extends StatefulWidget {
   final ScrollController controller;
   final bool isVisible;
+  final Map response;
 
   const PanelWidget(
-      {Key? key, required this.controller, required this.isVisible})
+      {Key? key, required this.controller, required this.isVisible, required this.response})
       : super(key: key);
 
   @override
@@ -18,8 +19,8 @@ class PanelWidget extends StatefulWidget {
 
 class _PanelWidgetState extends State<PanelWidget>
     with SingleTickerProviderStateMixin {
-  var widget1 = DetailWeatherElements();
-  var widget2 = FullWeekButton(); //(* ￣︿￣)
+  var widget1 = const DetailWeatherElements(response: {},);
+  var widget2 = const FullWeekButton(); //(* ￣︿￣)
   var currentWidget;
 
   @override
@@ -51,10 +52,11 @@ class _PanelWidgetState extends State<PanelWidget>
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  WeatherCard(),
-                  WeatherCard(),
-                  WeatherCard(),
-                  WeatherCard(),
+                  WeatherCard(response: widget.response['daily'][0]['temp']['morn'].round().toString(), time: ('06:00'),),
+                  WeatherCard(response: widget.response['daily'][0]['temp']['day'].round().toString(), time: ('12:00'),),
+                  WeatherCard(response: widget.response['daily'][0]['temp']['eve'].round().toString(), time: ('18:00'),),
+                  WeatherCard(response: widget.response['daily'][0]['temp']['night'].round().toString(), time: ('00:00'),),
+
                 ],
               ),
               // AnimatedSwitcher(
@@ -83,7 +85,7 @@ class _PanelWidgetState extends State<PanelWidget>
 
   slideView(isVisible) {
     if (isVisible) {
-      return DetailWeatherElements();
+      return DetailWeatherElements(response: widget.response,);
     }
     if (!isVisible) {
         return FullWeekButton();

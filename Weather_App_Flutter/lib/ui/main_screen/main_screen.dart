@@ -7,7 +7,6 @@ import 'package:weather_app_flutter/ui/main_screen/widgets/app_bar_controller.da
 import 'package:weather_app_flutter/ui/navigation_drawer/navigation_drawer.dart';
 import 'package:weather_app_flutter/ui/sliding_up_panel/sliding_up_panel.dart';
 
-
 class Main extends StatefulWidget {
   const Main({Key? key}) : super(key: key);
 
@@ -19,32 +18,37 @@ class _MainState extends State<Main> {
   final panelController = PanelController();
   late bool isVisible;
   late WeatherResponse response;
-  late Map response2;
 
-  // final defaultCityName = 'Moscow';
-  final defaultCityName = 'Sankt-Peterburg';
+  String defaultCityName = 'Moscow';
+
+  void setCity(String city){
+    setState(() {
+      defaultCityName = city;
+    });
+  }
+  // final defaultCityName = 'Sankt-Peterburg';
 
   final _dataService = DataService();
   final _oneCallApi = OneCallApi();
 
-  Future<dynamic> _loadData() async {
-    response = await _dataService.getWeather(defaultCityName);
+  Future<Map<String, dynamic>> loadData(cityName) async {
 
-    response2 = await _oneCallApi.getOneCall(30.2642, 59.8944);
-    print(response2);
-    print(response2['daily'][0]['temp']);
+    // cityName ??= defaultCityName;
+
+    response = await _dataService.getWeather(cityName);
+    Map<String, dynamic> response2 = await _oneCallApi.getOneCall(
+        response.cord.cord[1].toString(), response.cord.cord[0].toString());
     return response2;
   }
 
-
-    @override
+  @override
   Widget build(BuildContext context) {
     return FutureBuilder(
       // future: Future.delayed(const Duration(seconds: 3)),
-      future: _loadData(),
+      future: loadData(defaultCityName),
       // future: context.read<LoadData>().loadData(defaultCityName), // provider for new data(cities)
       // future: Provider.of<LoadData>(context, listen: false).loadData(defaultCityName),
-      builder: (context, snapshot) {
+      builder: (context, AsyncSnapshot<Map<String, dynamic>> snapshot) {
         if (snapshot.connectionState != ConnectionState.done) {
           return Splash();
         } else {
@@ -66,8 +70,10 @@ class _MainState extends State<Main> {
                     children: [
                       MainAppBar(
                         response: response,
+                        setCity: setCity,
                       ),
                       SlidingUpPanelWidget(
+                        response: snapshot.data!,
                         panelController: panelController,
                       ),
                     ],

@@ -6,8 +6,10 @@ import 'temperature_info_widget.dart';
 import 'add_button_widget.dart';
 
 class MainAppBar extends StatelessWidget {
-  MainAppBar({Key? key, required this.response}) : super(key: key);
+  MainAppBar({Key? key, required this.response, required this.setCity}) : super(key: key);
   WeatherResponse response;
+  final Function(String) setCity;
+
 
 
   @override
@@ -23,7 +25,9 @@ class MainAppBar extends StatelessWidget {
               children: [
                 NavButton(),
                 Degreess(response: response,),
-                AddButton(),
+                AddButton(
+                  setCity: setCity,
+                ),
               ],
             ),
           ],

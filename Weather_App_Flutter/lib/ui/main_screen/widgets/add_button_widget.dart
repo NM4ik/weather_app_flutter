@@ -6,6 +6,10 @@ import 'package:weather_app_flutter/ui/search_screen/search.dart';
 import 'package:weather_app_flutter/ui/settings_screen/settings.dart';
 
 class AddButton extends StatelessWidget {
+  final Function(String) setCity;
+
+  const AddButton({Key? key, required this.setCity}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +28,7 @@ class AddButton extends StatelessWidget {
             padding: EdgeInsets.zero,
             icon: (SvgPicture.asset("assets/images/icon_add_button.svg", width: 28,)),
             onPressed: () {Navigator.of(context).push(MaterialPageRoute
-              (builder: (context) => SearchPage(),));},
+              (builder: (context) => SearchPage(setCity: setCity,),));},
             iconSize: 30,
           )
       ),
