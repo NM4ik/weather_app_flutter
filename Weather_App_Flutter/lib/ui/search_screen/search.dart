@@ -16,6 +16,7 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   final _cityTextController = TextEditingController();
+  List<String> cities = ['Moscow'];
 
   @override
   Widget build(BuildContext context) {
@@ -45,8 +46,19 @@ class _SearchPageState extends State<SearchPage> {
           IconButton(
             padding: EdgeInsets.zero,
             // icon: Icon(Icons.add_circle_outline_rounded, color: Colors.white),
-            icon: (SvgPicture.asset("assets/images/icon_add_button.svg", width: 28, color: Colors.black,)), //Почему cancel.svg не найден...
-            onPressed: _search,
+            icon: (SvgPicture.asset(
+              "assets/images/search.svg",
+              width: 18,
+              color: Colors.black,
+            )),
+            //Почему cancel.svg не найден...
+            onPressed: () {
+              _search();
+              // Navigator.of(context).pop;
+              Future.delayed(Duration(milliseconds: 800), () {
+                Navigator.pop(context);
+              });
+            },
             iconSize: 30,
           )
         ],
@@ -60,14 +72,23 @@ class _SearchPageState extends State<SearchPage> {
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
-      body: Container(),
+      body: ListView.builder(
+          itemCount: cities.length,
+          itemBuilder: (BuildContext context, int index) {
+            return new Text(
+              cities[index],
+              style: TextStyle(color: Colors.white, fontSize: 24),
+            );
+          }),
     );
   }
 
-  void _search() async{
+  void _search() {
     String cityName = _cityTextController.text;
     widget.setCity(cityName);
-    Navigator.of(context).push(MaterialPageRoute
-      (builder: (context) => Main()));
+    setState(() {
+      cities.add(cityName);
+    });
+    // Navigator.of(context).pop;
   }
 }

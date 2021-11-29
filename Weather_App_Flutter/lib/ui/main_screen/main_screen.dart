@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:weather_app_flutter/api/data_sevice.dart';
@@ -19,9 +21,10 @@ class _MainState extends State<Main> {
   late bool isVisible;
   late WeatherResponse response;
 
-  String defaultCityName = 'Moscow';
+  String defaultCityName = 'Sankt-Peterburg';
 
   void setCity(String city){
+    print(city);
     setState(() {
       defaultCityName = city;
     });
@@ -43,15 +46,14 @@ class _MainState extends State<Main> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
+    return FutureBuilder<Map<String, dynamic>>(
       // future: Future.delayed(const Duration(seconds: 3)),
       future: loadData(defaultCityName),
       // future: context.read<LoadData>().loadData(defaultCityName), // provider for new data(cities)
       // future: Provider.of<LoadData>(context, listen: false).loadData(defaultCityName),
-      builder: (context, AsyncSnapshot<Map<String, dynamic>> snapshot) {
-        if (snapshot.connectionState != ConnectionState.done) {
-          return Splash();
-        } else {
+      builder: (context, snapshot) {
+        log(snapshot.toString());
+        if (snapshot.connectionState == ConnectionState.done) {
           return Scaffold(
             drawer: Container(width: 260, child: NavigationDrawerWidget()),
             body: Stack(
@@ -82,6 +84,8 @@ class _MainState extends State<Main> {
               ],
             ),
           );
+        } else {
+          return Splash();
         }
       },
     );

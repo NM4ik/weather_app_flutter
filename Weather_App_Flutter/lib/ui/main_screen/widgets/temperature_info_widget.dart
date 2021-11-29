@@ -35,7 +35,7 @@ class Degreess extends StatelessWidget {
                   ),),
                   Padding(
                     padding: const EdgeInsets.only(top: 20),
-                    child: Text('${response.tempInfo.temperature}', style: GoogleFonts.manrope(
+                    child: Text('${response.tempInfo.temperature.round()}', style: GoogleFonts.manrope(
                       fontSize: 80,
                       fontWeight: FontWeight.w600,
                       letterSpacing: -10,
@@ -47,7 +47,7 @@ class Degreess extends StatelessWidget {
           ) : Container(
             child: Column(
               children: [
-                Text('${response.tempInfo.temperature}', style: GoogleFonts.manrope(
+                Text('${(response.tempInfo.temperature).round()}', style: GoogleFonts.manrope(
                   fontSize: 80,
                   fontWeight: FontWeight.w600,
                   letterSpacing: -10,
