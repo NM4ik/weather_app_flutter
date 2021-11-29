@@ -29,15 +29,10 @@ class _MainState extends State<Main> {
       defaultCityName = city;
     });
   }
-  // final defaultCityName = 'Sankt-Peterburg';
-
   final _dataService = DataService();
   final _oneCallApi = OneCallApi();
 
   Future<Map<String, dynamic>> loadData(cityName) async {
-
-    // cityName ??= defaultCityName;
-
     response = await _dataService.getWeather(cityName);
     Map<String, dynamic> response2 = await _oneCallApi.getOneCall(
         response.cord.cord[1].toString(), response.cord.cord[0].toString());
@@ -47,12 +42,10 @@ class _MainState extends State<Main> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Map<String, dynamic>>(
-      // future: Future.delayed(const Duration(seconds: 3)),
       future: loadData(defaultCityName),
       // future: context.read<LoadData>().loadData(defaultCityName), // provider for new data(cities)
       // future: Provider.of<LoadData>(context, listen: false).loadData(defaultCityName),
       builder: (context, snapshot) {
-        log(snapshot.toString());
         if (snapshot.connectionState == ConnectionState.done) {
           return Scaffold(
             drawer: Container(width: 260, child: NavigationDrawerWidget()),

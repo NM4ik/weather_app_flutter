@@ -1,10 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:weather_app_flutter/api/data_sevice.dart';
-import 'package:weather_app_flutter/api/models.dart';
-import 'package:weather_app_flutter/ui/main_screen/main_screen.dart';
+import 'package:weather_app_flutter/provider/general.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key, required this.setCity}) : super(key: key);
@@ -16,7 +16,9 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   final _cityTextController = TextEditingController();
-  List<String> cities = ['Moscow'];
+  bool _validate = false;
+
+  // List<String> cities = ['Moscow'];
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +36,7 @@ class _SearchPageState extends State<SearchPage> {
             focusedBorder: UnderlineInputBorder(
               borderSide: BorderSide.none,
             ),
+            labelText: 'Enter the Value',
           ),
           style: GoogleFonts.manrope(
             fontSize: 13,
@@ -53,11 +56,16 @@ class _SearchPageState extends State<SearchPage> {
             )),
             //Почему cancel.svg не найден...
             onPressed: () {
-              _search();
-              // Navigator.of(context).pop;
-              Future.delayed(Duration(milliseconds: 800), () {
-                Navigator.pop(context);
-              });
+              _cityTextController.text.isEmpty
+                  ? _validate = true
+                  : _validate = false;
+              if (!_validate) {
+                _search();
+                // Navigator.of(context).pop;
+                Future.delayed(Duration(milliseconds: 800), () {
+                  Navigator.pop(context);
+                });
+              }
             },
             iconSize: 30,
           )
@@ -73,10 +81,10 @@ class _SearchPageState extends State<SearchPage> {
         ),
       ),
       body: ListView.builder(
-          itemCount: cities.length,
+          itemCount: context.watch<SearchList>().citises.length,
           itemBuilder: (BuildContext context, int index) {
-            return new Text(
-              cities[index],
+            return Text(
+              context.watch<SearchList>().citises[index],
               style: TextStyle(color: Colors.white, fontSize: 24),
             );
           }),
@@ -86,9 +94,7 @@ class _SearchPageState extends State<SearchPage> {
   void _search() {
     String cityName = _cityTextController.text;
     widget.setCity(cityName);
-    setState(() {
-      cities.add(cityName);
-    });
+    context.read<SearchList>().addCityToHistory(cityName);
     // Navigator.of(context).pop;
   }
 }
