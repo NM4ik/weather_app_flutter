@@ -17,6 +17,7 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   final _cityTextController = TextEditingController();
   bool _validate = false;
+  bool _toggle = false;
 
   // List<String> cities = ['Moscow'];
 
@@ -27,6 +28,19 @@ class _SearchPageState extends State<SearchPage> {
       backgroundColor: Color(0xFFE2EBFF),
       appBar: AppBar(
         title: TextField(
+          onSubmitted: (value) {
+            // _search(_cityTextController.text);
+            _cityTextController.text.isEmpty
+                ? _validate = true
+                : _validate = false;
+            if (!_validate) {
+              _search(_cityTextController.text);
+              // Navigator.of(context).pop;
+              Future.delayed(Duration(milliseconds: 800), () {
+                Navigator.pop(context);
+              });
+            }
+          },
           controller: _cityTextController,
           decoration: InputDecoration(
             border: InputBorder.none,
@@ -49,23 +63,17 @@ class _SearchPageState extends State<SearchPage> {
           IconButton(
             padding: EdgeInsets.zero,
             // icon: Icon(Icons.add_circle_outline_rounded, color: Colors.white),
-            icon: (SvgPicture.asset(
-              "assets/images/search.svg",
-              width: 18,
+            icon: Icon(
+              Icons.close,
               color: Colors.black,
-            )),
+              size: 20,
+            ),
             //Почему cancel.svg не найден...
             onPressed: () {
-              _cityTextController.text.isEmpty
-                  ? _validate = true
-                  : _validate = false;
-              if (!_validate) {
-                _search();
-                // Navigator.of(context).pop;
-                Future.delayed(Duration(milliseconds: 800), () {
-                  Navigator.pop(context);
-                });
-              }
+              // setState(() {
+              //   _cityTextController.clear();
+              // });
+              _cityTextController.clear();
             },
             iconSize: 30,
           )
@@ -80,19 +88,51 @@ class _SearchPageState extends State<SearchPage> {
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
-      body: ListView.builder(
-          itemCount: context.watch<SearchList>().citises.length,
-          itemBuilder: (BuildContext context, int index) {
-            return Text(
-              context.watch<SearchList>().citises[index],
-              style: TextStyle(color: Colors.white, fontSize: 24),
-            );
-          }),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 21.0, vertical: 30),
+        child: ListView.builder(
+            itemCount: context.watch<SearchList>().citises.length,
+            itemBuilder: (BuildContext context, int index) {
+              return ListTile(
+                onTap: () {
+                  // print(context.read<SearchList>().citises[index]);
+                  String city = Provider.of<SearchList>(context, listen: false).citises[index].toString();
+                  _search(city);
+                  Future.delayed(Duration(milliseconds: 800), () {
+                    Navigator.pop(context);
+                  });
+                  },
+                title: Text(
+                  context.watch<SearchList>().citises[index],
+                  style: GoogleFonts.manrope(
+                      color: Colors.black,
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600),
+                ),
+                trailing: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        _toggle = !_toggle;
+                      });
+                    },
+                    icon: _toggle
+                        ? Icon(
+                            Icons.star,
+                            color: Colors.black,
+                          )
+                        : Icon(
+                            Icons.star_border,
+                            color: Colors.black,
+                          )),
+
+              );
+            }),
+      ),
     );
   }
 
-  void _search() {
-    String cityName = _cityTextController.text;
+  void _search(String text) {
+    String cityName = text;
     widget.setCity(cityName);
     context.read<SearchList>().addCityToHistory(cityName);
     // Navigator.of(context).pop;
