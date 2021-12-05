@@ -50,7 +50,7 @@ class Degreess extends StatelessWidget {
                 Text('${(response.tempInfo.temperature).round()}', style: GoogleFonts.manrope(
                   fontSize: 80,
                   fontWeight: FontWeight.w600,
-                  letterSpacing: -10,
+                  letterSpacing: -3,
                 ),),
                 Text(dateNow, style: GoogleFonts.manrope(
                     fontWeight: FontWeight.w600,

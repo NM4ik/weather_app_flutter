@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:weather_app_flutter/provider/settings_provider.dart';
 
 class SettingsCardPageWidget extends StatefulWidget {
   final String title;
@@ -20,6 +22,12 @@ class SettingsCardPageWidget extends StatefulWidget {
 
 class _SettingsCardPageWidgetState extends State<SettingsCardPageWidget> {
   var toggleIndex = 0;
+
+  // toggleIndexes() {
+  //   for(e in Provider.of<SettingProvider>(context).settingMap){
+  //
+  //   }
+  // }
 
   get title => widget.title;
 
@@ -104,10 +112,14 @@ class _SettingsCardPageWidgetState extends State<SettingsCardPageWidget> {
                         color: Color(0xff4B5F88),
                       ),
                     ),
-                    selectedIndex: toggleIndex,
+                    selectedIndex: toggleIndexes(Provider.of<SettingProvider>(context).settingMap, title),
+                    // selectedIndex: toggleIndex,
                     onChanged: (index) {
                       setState(() {
-                        toggleIndex = index;
+                        context.read<SettingProvider>().updateMap(widget.title, index);
+                        toggleIndexes(Provider.of<SettingProvider>(context, listen: false).settingMap, title);
+                        // print(index);
+                        // toggleIndex = index;
                       });
                     },
                   ),
@@ -119,4 +131,13 @@ class _SettingsCardPageWidgetState extends State<SettingsCardPageWidget> {
       ),
     );
   }
+}
+
+int toggleIndexes(Map<String, int> map, String title) {
+  for(var item in map.entries){
+    if(item.key == title){
+      return item.value;
+    }
+  }
+  return 0;
 }

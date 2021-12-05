@@ -4,7 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_app_flutter/provider/data_provider.dart';
-import 'package:weather_app_flutter/provider/general.dart';
+import 'package:weather_app_flutter/provider/general_provider.dart';
+import 'package:weather_app_flutter/provider/settings_provider.dart';
 import 'package:weather_app_flutter/ui/main_screen/main_screen.dart';
 import 'package:weather_app_flutter/provider/is_visible_provider.dart';
 
@@ -13,8 +14,14 @@ void main() {
   runApp(
     // const MyApp()
     MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => isVisibleProvider()), ChangeNotifierProvider(create: (_) => LoadData()), ChangeNotifierProvider(create: (_) => SearchList())],
-      child: MyApp(),
+      providers: [
+        ChangeNotifierProvider(create: (_) => isVisibleProvider()),
+        ChangeNotifierProvider(create: (_) => LoadData()),
+        ChangeNotifierProvider(create: (_) => SearchList()),
+        ChangeNotifierProvider(create: (_) => InitialFunc()),
+        ChangeNotifierProvider(create: (_) => SettingProvider()),
+      ],
+      child: const MyApp(),
     ),
   );
 }
@@ -35,6 +42,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
-

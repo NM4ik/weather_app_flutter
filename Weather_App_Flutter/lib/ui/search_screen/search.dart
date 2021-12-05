@@ -4,11 +4,10 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:weather_app_flutter/provider/general.dart';
+import 'package:weather_app_flutter/provider/general_provider.dart';
 
 class SearchPage extends StatefulWidget {
-  const SearchPage({Key? key, required this.setCity}) : super(key: key);
-  final Function(String) setCity;
+  const SearchPage({Key? key}) : super(key: key);
 
   @override
   State<SearchPage> createState() => _SearchPageState();
@@ -19,23 +18,19 @@ class _SearchPageState extends State<SearchPage> {
   bool _validate = false;
   bool _toggle = false;
 
-  // List<String> cities = ['Moscow'];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Colors.transparent,
       backgroundColor: Color(0xFFE2EBFF),
       appBar: AppBar(
         title: TextField(
           onSubmitted: (value) {
-            // _search(_cityTextController.text);
             _cityTextController.text.isEmpty
                 ? _validate = true
                 : _validate = false;
             if (!_validate) {
               _search(_cityTextController.text);
-              // Navigator.of(context).pop;
               Future.delayed(Duration(milliseconds: 800), () {
                 Navigator.pop(context);
               });
@@ -62,17 +57,12 @@ class _SearchPageState extends State<SearchPage> {
         actions: [
           IconButton(
             padding: EdgeInsets.zero,
-            // icon: Icon(Icons.add_circle_outline_rounded, color: Colors.white),
             icon: Icon(
               Icons.close,
               color: Colors.black,
               size: 20,
             ),
-            //Почему cancel.svg не найден...
             onPressed: () {
-              // setState(() {
-              //   _cityTextController.clear();
-              // });
               _cityTextController.clear();
             },
             iconSize: 30,
@@ -95,36 +85,38 @@ class _SearchPageState extends State<SearchPage> {
             itemBuilder: (BuildContext context, int index) {
               return ListTile(
                 onTap: () {
-                  // print(context.read<SearchList>().citises[index]);
-                  String city = Provider.of<SearchList>(context, listen: false).citises[index].toString();
+                  String city = Provider.of<SearchList>(context, listen: false)
+                      .citises[index]
+                      .toString();
                   _search(city);
                   Future.delayed(Duration(milliseconds: 800), () {
                     Navigator.pop(context);
                   });
-                  },
+                },
                 title: Text(
                   context.watch<SearchList>().citises[index],
+                  //   Provider.of<SearchList>(context).citises[index].name,
                   style: GoogleFonts.manrope(
                       color: Colors.black,
                       fontSize: 13,
                       fontWeight: FontWeight.w600),
                 ),
                 trailing: IconButton(
-                    onPressed: () {
-                      setState(() {
-                        _toggle = !_toggle;
-                      });
-                    },
-                    icon: _toggle
-                        ? Icon(
-                            Icons.star,
-                            color: Colors.black,
-                          )
-                        : Icon(
-                            Icons.star_border,
-                            color: Colors.black,
-                          )),
-
+                  icon: _toggle
+                      ? Icon(
+                          Icons.star,
+                          color: Colors.black,
+                        )
+                      : Icon(
+                          Icons.star_border,
+                          color: Colors.black,
+                        ),
+                  onPressed: () {
+                    setState(() {
+                      _toggle = !_toggle;
+                    });
+                  },
+                ),
               );
             }),
       ),
@@ -133,8 +125,7 @@ class _SearchPageState extends State<SearchPage> {
 
   void _search(String text) {
     String cityName = text;
-    widget.setCity(cityName);
+    Provider.of<InitialFunc>(context, listen: false).setCity(cityName);
     context.read<SearchList>().addCityToHistory(cityName);
-    // Navigator.of(context).pop;
   }
 }
