@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:weather_app_flutter/provider/general_provider.dart';
 import 'package:weather_app_flutter/ui/sliding_up_panel/widgets/header_stick_widget.dart';
 import 'package:weather_app_flutter/ui/sliding_up_panel/widgets/sliding_up_panel_widget.dart';
 import 'package:weather_app_flutter/provider/is_visible_provider.dart';
@@ -8,7 +9,8 @@ import 'package:provider/provider.dart';
 
 class SlidingUpPanelWidget extends StatefulWidget {
   final PanelController panelController;
-  final Map<String, dynamic> response;
+  // final Map<String, dynamic> response;
+  final List<Weather> response;
 
   const SlidingUpPanelWidget({Key? key, required this.panelController, required this.response})
       : super(key: key);

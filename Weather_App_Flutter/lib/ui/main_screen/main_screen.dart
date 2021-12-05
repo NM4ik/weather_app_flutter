@@ -21,34 +21,6 @@ class Main extends StatefulWidget {
 class _MainState extends State<Main> {
   final panelController = PanelController();
   late bool isVisible;
-  // late WeatherResponse response;
-  //
-  // String defaultCityName = 'Sankt-Peterburg';
-  //
-  // void setCity(String city) {
-  //   print(city);
-  //   setState(() {
-  //     Provider.of<InitialFunc>(context).defaultCityName = city;
-  //   });
-  // }
-  //
-  // final _dataService = DataService();
-  // final _oneCallApi = OneCallApi();
-  //
-  // Future<Map<String, dynamic>> loadData(cityName) async {
-  //   try {
-  //     response = await _dataService.getWeather(cityName);
-  //     Map<String, dynamic> response2 = await _oneCallApi.getOneCall(
-  //         response.cord.cord[1].toString(), response.cord.cord[0].toString());
-  //     return response2;
-  //   } catch(e){
-  //     print('Неверно указан город или не установлено соединение');
-  //     response = await _dataService.getWeather('Sankt-Peterburg');
-  //     Map<String, dynamic> response2 = await _oneCallApi.getOneCall(
-  //         response.cord.cord[1].toString(), response.cord.cord[0].toString());
-  //     return response2;
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +47,8 @@ class _MainState extends State<Main> {
                         response: Provider.of<InitialFunc>(context).response,
                       ),
                       SlidingUpPanelWidget(
-                        response: snapshot.data!,
+                        // response: snapshot.data!,
+                        response: Provider.of<InitialFunc>(context).todayWeather,
                         panelController: panelController,
                       ),
                     ],

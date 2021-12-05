@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:weather_app_flutter/provider/data_provider.dart';
 import 'package:weather_app_flutter/provider/general_provider.dart';
 import 'package:weather_app_flutter/provider/settings_provider.dart';
+import 'package:weather_app_flutter/ui/blocks/temperature_info.dart';
 import 'package:weather_app_flutter/ui/main_screen/main_screen.dart';
 import 'package:weather_app_flutter/provider/is_visible_provider.dart';
 

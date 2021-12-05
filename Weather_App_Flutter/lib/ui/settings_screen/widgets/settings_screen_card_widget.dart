@@ -30,9 +30,7 @@ class _SettingsCardPageWidgetState extends State<SettingsCardPageWidget> {
   // }
 
   get title => widget.title;
-
   get unit1 => widget.unitMeasurementFirstValue;
-
   get unit2 => widget.unitMeasurementSecondValue;
 
   @override

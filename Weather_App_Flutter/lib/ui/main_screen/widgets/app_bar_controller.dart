@@ -25,9 +25,7 @@ class MainAppBar extends StatelessWidget {
               children: [
                 NavButton(),
                 Degreess(response: response,),
-                AddButton(
-                  // setCity: setCity,
-                ),
+                AddButton(),
               ],
             ),
           ],

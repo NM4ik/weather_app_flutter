@@ -4,9 +4,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class WeatherCard extends StatelessWidget {
-  const WeatherCard({Key? key, required this.response, required this.time})
+  const WeatherCard({Key? key, required this.response, required this.time, required this.image})
       : super(key: key);
   final String response;
+  final String image;
   final String time;
 
   @override
@@ -34,7 +35,7 @@ class WeatherCard extends StatelessWidget {
                     fontSize: 17),
               ),
               SvgPicture.asset(
-                ("assets/images/sun.svg"),
+                ("assets/images/$image.svg"),
                 width: 40,
               ),
               Text(

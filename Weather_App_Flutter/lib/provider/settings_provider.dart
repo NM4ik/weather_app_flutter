@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:weather_app_flutter/ui/blocks/temperature_info.dart';
 
 class SettingProvider with ChangeNotifier {
+
   Map<String, int> settingMap = {
-    "Температура" : 1,
+    "Температура" : 0,
     "Сила ветра": 0,
     "Давление": 0
   };
@@ -14,14 +16,6 @@ class SettingProvider with ChangeNotifier {
         settingMap[key] = index;
       }
     });
+    notifyListeners();
   }
-
-  // void updateMap(){
-  //   print(settingMap.values);
-  //   settingMap.forEach((key, value) {
-  //     if(key == "Температура"){
-  //       settingMap[key] = 10;
-  //     }
-  //   });
-  // }
 }
