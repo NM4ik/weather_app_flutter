@@ -7,7 +7,8 @@ class SettingProvider with ChangeNotifier {
   Map<String, int> settingMap = {
     "Температура" : 0,
     "Сила ветра": 0,
-    "Давление": 0
+    "Давление": 0,
+    "Тема": 0
   };
 
   void updateMap(title, index){

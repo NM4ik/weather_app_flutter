@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:weather_app_flutter/provider/general_provider.dart';
+import 'package:weather_app_flutter/ui/search_screen/search_entity.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -16,7 +18,6 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   final _cityTextController = TextEditingController();
   bool _validate = false;
-  bool _toggle = false;
 
 
   @override
@@ -81,48 +82,14 @@ class _SearchPageState extends State<SearchPage> {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 21.0, vertical: 30),
         child: ListView.builder(
+            scrollDirection: Axis.vertical,
             itemCount: context.watch<SearchList>().citises.length,
             itemBuilder: (BuildContext context, int index) {
-              return ListTile(
-                onTap: () {
-                  String city = Provider.of<SearchList>(context, listen: false)
-                      .citises[index]
-                      .toString();
-                  _search(city);
-                  Future.delayed(Duration(milliseconds: 800), () {
-                    Navigator.pop(context);
-                  });
-                },
-                title: Text(
-                  context.watch<SearchList>().citises[index],
-                  //   Provider.of<SearchList>(context).citises[index].name,
-                  style: GoogleFonts.manrope(
-                      color: Colors.black,
-                      fontSize: 13,
-                      fontWeight: FontWeight.w600),
-                ),
-                trailing: IconButton(
-                  icon: _toggle
-                      ? Icon(
-                          Icons.star,
-                          color: Colors.black,
-                        )
-                      : Icon(
-                          Icons.star_border,
-                          color: Colors.black,
-                        ),
-                  onPressed: () {
-                    setState(() {
-                      _toggle = !_toggle;
-                    });
-                  },
-                ),
-              );
+              return SearchEntity(index: index);
             }),
       ),
     );
   }
-
   void _search(String text) {
     String cityName = text;
     Provider.of<InitialFunc>(context, listen: false).setCity(cityName);

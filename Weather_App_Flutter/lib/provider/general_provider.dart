@@ -19,6 +19,7 @@ class InitialFunc with ChangeNotifier {
   final _oneCallApi = OneCallApi();
 
   List<Weather> todayWeather = [];
+  List<Weather> sevenDays = [];
   DateTime date = DateTime.now();
 
   Future<Map<String, dynamic>> loadData(cityName) async {
@@ -26,10 +27,8 @@ class InitialFunc with ChangeNotifier {
       response = await _dataService.getWeather(cityName);
       Map<String, dynamic> response2 = await _oneCallApi.getOneCall(
           response.cord.cord[1].toString(), response.cord.cord[0].toString());
-
       todayWeather = hourly(response2);
-
-      print(todayWeather);
+      sevenDays = sevenDaysFunc(response2);
 
       return response2;
     } catch (e) {
@@ -39,6 +38,28 @@ class InitialFunc with ChangeNotifier {
           response.cord.cord[1].toString(), response.cord.cord[0].toString());
       return response2;
     }
+  }
+
+  List<Weather> sevenDaysFunc(Map<String, dynamic> response2) {
+    List<Weather> sevenDays = [];
+
+    for (var i = 0; i < 8; i++) {
+      DateTime _date = DateTime.now();
+      _date = _date.add(Duration(days: i));
+      String day = DateFormat.MMMMd('ru').format(_date);
+
+      var daily = Weather(image: response2["daily"][i]["main"].toString(),
+          current: response2["daily"][i]["temp"]["day"],
+          time: day,
+          temp: response2['current']['temp'],
+          humidity: response2["daily"][i]["humidity"],
+          pressure: response2["daily"][i]["pressure"],
+          wind_speed: response2["daily"][i]["wind_speed"]
+      );
+
+      sevenDays.add(daily);
+    }
+    return sevenDays;
   }
 
   List<Weather> hourly(Map<String, dynamic> response2) {
@@ -52,13 +73,13 @@ class InitialFunc with ChangeNotifier {
         i = i - 24;
       }
       var hourly = Weather(
-          image: response2['hourly'][i]["weather"][0]["main"],
-          current: response2['hourly'][i]["temp"],
-          time: Duration(hours: i).toString().split(":")[0] + ":00",
-          humidity: response2['current']['humidity'],
-          temp: response2['current']['temp'],
-          pressure: response2['current']['pressure'],
-          wind_speed: response2['current']['wind_speed'],
+        image: response2['hourly'][i]["weather"][0]["main"],
+        current: response2['hourly'][i]["temp"],
+        time: Duration(hours: i).toString().split(":")[0] + ":00",
+        humidity: response2['current']['humidity'],
+        temp: response2['current']['temp'],
+        pressure: response2['current']['pressure'],
+        wind_speed: response2['current']['wind_speed'],
       );
       todayWeather.add(hourly);
     }
@@ -88,19 +109,50 @@ class Weather {
 
 class SearchList with ChangeNotifier {
   List<String> citises = [];
+  List<String> favorites = ['Moscow', 'London'];
 
   void addCityToHistory(cityName) {
-    if (citises.isNotEmpty) {
-      for (int i = 0; i < citises.length; i++) {
-        if (cityName == citises[i]) {
-          return;
-        } else {
-          citises.add(cityName);
-        }
+    int quantity = 0;
+    for (int i = 0; i < citises.length; i++) {
+      if (citises[i] == cityName) {
+        quantity++;
       }
-    } else {
+    }
+    if (quantity == 0) {
       citises.add(cityName);
     }
     notifyListeners();
+  }
+
+  void addCityToFavorite(cityName) {
+    int quantity = 0;
+    for (int i = 0; i < favorites.length; i++) {
+      if (favorites[i] == cityName) {
+        quantity++;
+      }
+    }
+    if (quantity == 0) {
+      favorites.add(cityName);
+    }
+    notifyListeners();
+    print(favorites);
+  }
+
+  void popCityFromFavorites(cityName) {
+    for (int i = 0; i < favorites.length; i++) {
+      if (favorites[i] == cityName) {
+        favorites.remove(favorites[i]);
+      }
+    }
+    notifyListeners();
+  }
+
+  bool searchingForEmpty(cityName) {
+    for (int i = 0; i < favorites.length; i++) {
+      if (favorites[i] == cityName) {
+        return true;
+      }
+    }
+    return false;
   }
 }

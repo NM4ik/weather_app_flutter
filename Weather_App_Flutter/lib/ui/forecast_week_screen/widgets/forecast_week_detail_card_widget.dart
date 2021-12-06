@@ -3,7 +3,10 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ForecastWeekDetailCard extends StatelessWidget {
-  const ForecastWeekDetailCard({Key? key}) : super(key: key);
+  const ForecastWeekDetailCard({Key? key, required this.icon, required this.value, required this.typeOfValue}) : super(key: key);
+  final String icon;
+  final String value;
+  final String typeOfValue;
 
   @override
   Widget build(BuildContext context) {
@@ -12,17 +15,18 @@ class ForecastWeekDetailCard extends StatelessWidget {
         // mainAxisAlignment: MainAxisAlignment.center,
         // crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SvgPicture.asset(("assets/images/thermometer.svg"),),
-          Text("8", style: GoogleFonts.manrope(  //data quantity
+          SvgPicture.asset('assets/images/$icon'),
+          const SizedBox(width: 2,),
+          Text(value, style: GoogleFonts.manrope(  //data quantity
             fontSize: 16,
             fontWeight: FontWeight.w600,
             color: Colors.black,
           ),),
-
-          Text("˚c", style: GoogleFonts.manrope(  //signature for data
+          const SizedBox(width: 2,),
+          Text(typeOfValue, style: GoogleFonts.manrope(  //signature for data
             fontSize: 16,
             fontWeight: FontWeight.w600,
-            color: Color(0xFF5A5A5A),
+            color: const Color(0xFF5A5A5A),
           ),),
         ],
       ),

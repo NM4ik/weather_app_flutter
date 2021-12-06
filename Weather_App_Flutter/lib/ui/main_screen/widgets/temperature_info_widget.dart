@@ -50,7 +50,7 @@ class _DegreessState extends State<Degreess> {
                             style: GoogleFonts.manrope(
                               fontSize: 80,
                               fontWeight: FontWeight.w600,
-                              letterSpacing: -10,
+                              letterSpacing: -7,
                             ),
                           ),
                         ),
@@ -71,7 +71,7 @@ class _DegreessState extends State<Degreess> {
                         style: GoogleFonts.manrope(
                           fontSize: 80,
                           fontWeight: FontWeight.w600,
-                          letterSpacing: -10,
+                          letterSpacing: -7,
                         ),
                       ),
                       Text(

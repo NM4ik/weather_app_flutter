@@ -65,7 +65,7 @@ class _PanelWidgetState extends State<PanelWidget>
                         ? '${widget.response[1].current.round().toString()}˚c'
                         : '${(9 * (widget.response[1].current) / 5 + 32).round()}˚F',
                     time: widget.response[1].time,
-                    image: 'sun',
+                    image: widget.response[1].image,
                   ),
                   WeatherCard(
                     response: context
@@ -75,7 +75,7 @@ class _PanelWidgetState extends State<PanelWidget>
                         ? '${widget.response[2].current.round().toString()}˚c'
                         : '${(9 * (widget.response[2].current) / 5 + 32).round()}˚F',
                     time: widget.response[2].time,
-                    image: 'sun',
+                    image: widget.response[2].image,
                   ),
                   WeatherCard(
                     response: context
@@ -85,7 +85,7 @@ class _PanelWidgetState extends State<PanelWidget>
                         ? '${widget.response[3].current.round().toString()}˚c'
                         : '${(9 * (widget.response[3].current) / 5 + 32).round()}˚F',
                     time: widget.response[3].time,
-                    image: 'sun',
+                    image: widget.response[3].image,
                   ),
                   WeatherCard(
                     response: context
@@ -95,7 +95,7 @@ class _PanelWidgetState extends State<PanelWidget>
                         ? '${widget.response[4].current.round().toString()}˚c'
                         : '${(9 * (widget.response[4].current) / 5 + 32).round()}˚F',
                     time: widget.response[4].time,
-                    image: 'sun',
+                    image: widget.response[4].image,
                   ),
                 ],
               ),
