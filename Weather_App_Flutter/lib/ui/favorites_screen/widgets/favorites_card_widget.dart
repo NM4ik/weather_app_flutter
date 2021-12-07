@@ -4,10 +4,15 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_app_flutter/provider/general_provider.dart';
 
-class FavoritesCardWidget extends StatelessWidget {
+class FavoritesCardWidget extends StatefulWidget {
   const FavoritesCardWidget({Key? key, required this.index}) : super(key: key);
   final int index;
 
+  @override
+  State<FavoritesCardWidget> createState() => _FavoritesCardWidgetState();
+}
+
+class _FavoritesCardWidgetState extends State<FavoritesCardWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -23,14 +28,23 @@ class FavoritesCardWidget extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Padding(
-                  padding: EdgeInsets.only(left: 16),
-                  // color: Colors.red,
-                  child: Text(context.watch<SearchList>().favorites[index], style: GoogleFonts.manrope(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 13,
-                    color: Colors.black
-                  ),),
+                GestureDetector(
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 16),
+                    // color: Colors.red,
+                    child: Text(context.watch<SearchList>().favorites[widget.index].toString(), style: GoogleFonts.manrope(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 13,
+                      color: Colors.black
+                    ),),
+                  ),
+                  onTap: () {
+                    _search(Provider.of<SearchList>(context, listen: false).favorites[widget.index].toString());
+                    Future.delayed(Duration(milliseconds: 800), () {
+                      Navigator.pop(context);
+                    });
+                    // _search(context.watch<SearchList>().favorites[widget.index].toString());
+                  },
                 ),
                 Container(
                   child: Neumorphic(
@@ -42,7 +56,7 @@ class FavoritesCardWidget extends StatelessWidget {
                       icon: Icon(Icons.close, color: Colors.black),
                       onPressed: () {
                         // print(Provider.of<SearchList>(context, listen: false).favorites[index]);
-                        Provider.of<SearchList>(context, listen: false).popCityFromFavorites(Provider.of<SearchList>(context, listen: false).favorites[index].toString());
+                        Provider.of<SearchList>(context, listen: false).popCityFromFavorites(Provider.of<SearchList>(context, listen: false).favorites[widget.index].toString());
                       },
                       iconSize: 25,
                     ),
@@ -54,5 +68,10 @@ class FavoritesCardWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+  void _search(String text) {
+    String cityName = text;
+    Provider.of<InitialFunc>(context, listen: false).setCity(cityName);
+    context.read<SearchList>().addCityToHistory(cityName);
   }
 }

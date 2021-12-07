@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:weather_app_flutter/api/data_sevice.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weather_app_flutter/api/models.dart';
 import 'package:weather_app_flutter/provider/settings_provider.dart';
 import 'package:weather_app_flutter/ui/blocks/temperature_info.dart';
 
 class InitialFunc with ChangeNotifier {
   late WeatherResponse response;
-  String defaultCityName = 'Sankt-Peterburg';
+  late String defaultCityName;
+  // String defaultCityName = 'Sankt-Peterburg';
 
-  void setCity(String city) {
+
+  setCity(String city) async{
     print(city);
-    defaultCityName = city;
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setString('city', city);
+    // defaultCityName = city;
     notifyListeners();
   }
 
@@ -22,14 +27,22 @@ class InitialFunc with ChangeNotifier {
   List<Weather> sevenDays = [];
   DateTime date = DateTime.now();
 
-  Future<Map<String, dynamic>> loadData(cityName) async {
+  Future<String> getCityFromSharedPref() async{
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    final city = preferences.getString('city');
+    if(city == null){
+      return 'Sankt-Peterburg';
+    }
+    return city;
+  }
+
+  Future<Map<String, dynamic>> loadData() async {
     try {
-      response = await _dataService.getWeather(cityName);
+      response = await _dataService.getWeather(await getCityFromSharedPref());
       Map<String, dynamic> response2 = await _oneCallApi.getOneCall(
           response.cord.cord[1].toString(), response.cord.cord[0].toString());
       todayWeather = hourly(response2);
       sevenDays = sevenDaysFunc(response2);
-
       return response2;
     } catch (e) {
       print('Неверно указан город или не установлено соединение! Ошибка: $e');
@@ -107,11 +120,47 @@ class Weather {
   });
 }
 
-class SearchList with ChangeNotifier {
-  List<String> citises = [];
-  List<String> favorites = ['Moscow', 'London'];
 
-  void addCityToHistory(cityName) {
+Future<List<String>> getCitiesSharedPref() async{
+  SharedPreferences preferences = await SharedPreferences.getInstance();
+  final cities = preferences.getStringList('cities');
+  if(cities == null){
+    return [];
+  }
+  return cities;
+}
+
+Future<List<String>> getFavSharedPref() async{
+  SharedPreferences preferences = await SharedPreferences.getInstance();
+  final favorites = preferences.getStringList('favorites');
+  if(favorites == null){
+    return [];
+  }
+  return favorites;
+}
+
+Future<void> addCitiesSharedPref(List<String> cities) async{
+  SharedPreferences preferences = await SharedPreferences.getInstance();
+  preferences.setStringList('cities', cities);
+}
+
+Future<void> addFavoriteSharedPref(List<String> favorites) async{
+  SharedPreferences preferences = await SharedPreferences.getInstance();
+  preferences.setStringList('favorites', favorites);
+}
+
+class SearchList with ChangeNotifier{
+  List<String> citises = [];
+  List<String> favorites = [];
+
+  void initCities() async{
+    citises = await getCitiesSharedPref();
+  }
+  void initFavorites() async{
+    favorites = await getFavSharedPref();
+  }
+
+  void addCityToHistory(cityName) async{
     int quantity = 0;
     for (int i = 0; i < citises.length; i++) {
       if (citises[i] == cityName) {
@@ -121,10 +170,13 @@ class SearchList with ChangeNotifier {
     if (quantity == 0) {
       citises.add(cityName);
     }
+
+
+    await addCitiesSharedPref(citises);
     notifyListeners();
   }
 
-  void addCityToFavorite(cityName) {
+  void addCityToFavorite(cityName) async{
     int quantity = 0;
     for (int i = 0; i < favorites.length; i++) {
       if (favorites[i] == cityName) {
@@ -134,16 +186,20 @@ class SearchList with ChangeNotifier {
     if (quantity == 0) {
       favorites.add(cityName);
     }
+
+    await addFavoriteSharedPref(favorites);
     notifyListeners();
-    print(favorites);
+    // print(favorites);
   }
 
-  void popCityFromFavorites(cityName) {
+  void popCityFromFavorites(cityName) async{
     for (int i = 0; i < favorites.length; i++) {
       if (favorites[i] == cityName) {
         favorites.remove(favorites[i]);
       }
     }
+
+    await addFavoriteSharedPref(favorites);
     notifyListeners();
   }
 

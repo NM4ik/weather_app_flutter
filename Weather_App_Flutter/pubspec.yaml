@@ -40,11 +40,13 @@ dependencies:
   google_fonts: ^2.1.0
   flutter_svg: ^0.23.0+1
   sliding_up_panel: ^2.0.0+1
+#  shared_preferences: ^2.0.9
   provider: ^6.0.1
   intl: ^0.17.0
   flutter_neumorphic:
     git:
       url: https://github.com/tsvillain/Flutter-Neumorphic.git
+  shared_preferences: ^2.0.9
 
 flutter_native_splash:
 

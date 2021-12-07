@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weather_app_flutter/provider/settings_provider.dart';
 
 class SettingsCardPageWidget extends StatefulWidget {
@@ -115,6 +116,7 @@ class _SettingsCardPageWidgetState extends State<SettingsCardPageWidget> {
                     onChanged: (index) {
                       setState(() {
                         context.read<SettingProvider>().updateMap(widget.title, index);
+                        Provider.of<SettingProvider>(context, listen: false).addSettingsSharedPref(widget.title, index);
                         toggleIndexes(Provider.of<SettingProvider>(context, listen: false).settingMap, title);
                         // print(index);
                         // toggleIndex = index;

@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:weather_app_flutter/api/data_sevice.dart';
 import 'package:weather_app_flutter/api/models.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weather_app_flutter/provider/general_provider.dart';
 import 'package:weather_app_flutter/ui/splash/splash-loader.dart';
 import 'package:weather_app_flutter/ui/main_screen/widgets/app_bar_controller.dart';
@@ -21,11 +22,14 @@ class Main extends StatefulWidget {
 class _MainState extends State<Main> {
   final panelController = PanelController();
   late bool isVisible;
+  late final String sharedCity;
+
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Map<String, dynamic>>(
-      future: Provider.of<InitialFunc>(context).loadData(Provider.of<InitialFunc>(context).defaultCityName.toString()),
+      // future: Provider.of<InitialFunc>(context).loadData(sharedCity = prefs.),
+      future: Provider.of<InitialFunc>(context).loadData(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           return Scaffold(

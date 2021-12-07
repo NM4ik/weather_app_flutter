@@ -36,6 +36,7 @@ class _DegreessState extends State<Degreess> {
                           style: GoogleFonts.manrope(
                             fontSize: 18,
                             fontWeight: FontWeight.w600,
+                            color: Colors.white,
                           ),
                         ),
                         Padding(
@@ -51,6 +52,7 @@ class _DegreessState extends State<Degreess> {
                               fontSize: 80,
                               fontWeight: FontWeight.w600,
                               letterSpacing: -7,
+                              color: Colors.white,
                             ),
                           ),
                         ),
@@ -69,6 +71,7 @@ class _DegreessState extends State<Degreess> {
                             ? '${widget.response.tempInfo.temperature.round()} ˚c'
                             : '${(9 * (widget.response.tempInfo.temperature) / 5 + 32).round()} ˚F',
                         style: GoogleFonts.manrope(
+                          color: Colors.white,
                           fontSize: 80,
                           fontWeight: FontWeight.w600,
                           letterSpacing: -7,
@@ -77,7 +80,9 @@ class _DegreessState extends State<Degreess> {
                       Text(
                         dateNow,
                         style: GoogleFonts.manrope(
-                            fontWeight: FontWeight.w600, fontSize: 20),
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 20),
                       ),
                     ],
                   ),
