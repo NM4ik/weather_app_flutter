@@ -13,8 +13,8 @@ class WeatherDetailCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Flexible(
       child: Neumorphic(
-        style: const NeumorphicStyle(
-          color: Color(0xFFE0E9FD),
+        style: NeumorphicStyle(
+          color: Theme.of(context).dialogBackgroundColor,
           depth: 5,
           intensity: 0.4,
           lightSource: LightSource.topLeft,
@@ -30,21 +30,21 @@ class WeatherDetailCard extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(right: 2.0),
-                  child: SvgPicture.asset(("assets/images/$iconName"),),
+                  child: SvgPicture.asset(("assets/images/$iconName"), color: Theme.of(context).primaryColor,),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(right: 2),
                   child: Text(response, style: GoogleFonts.manrope(  //data quantity
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
-                    color: Colors.black,
+                    color: Theme.of(context).primaryColor,
                   ),),
                 ),
 
                 Text(type, style: GoogleFonts.manrope(  //signature for data
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
-                  color: Color(0xFF5A5A5A),
+                  color: Theme.of(context).primaryColor,
                 ),),
               ],
             ),

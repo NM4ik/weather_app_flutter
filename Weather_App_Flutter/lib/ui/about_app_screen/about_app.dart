@@ -10,22 +10,22 @@ class AboutAppPage extends StatelessWidget {
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height * 0.5;
     return Scaffold(
-        backgroundColor: Color(0xFFE2EBFF),
+        backgroundColor: Theme.of(context).dialogBackgroundColor,
         appBar: AppBar(
           title: Text(
             "Настройки",
             style: GoogleFonts.manrope(
               fontWeight: FontWeight.w600,
               fontSize: 20,
-              color: Colors.black,
+              color: Theme.of(context).primaryColor,
             ),
           ),
-          backgroundColor: Color(0xFFE2EBFF),
+          backgroundColor: Theme.of(context).dialogBackgroundColor,
           elevation: 0,
           leading: IconButton(
             icon: SvgPicture.asset(
               ("assets/images/iconBack.svg"),
-              color: Colors.black,
+              color: Theme.of(context).primaryColor,
             ),
             onPressed: () => Navigator.of(context).pop(),
           ),
@@ -39,7 +39,7 @@ class AboutAppPage extends StatelessWidget {
                   depth: -15,
                   intensity: 0.7,
                   lightSource: LightSource.top,
-                  color: Color(0xFFE2EBFF)
+                  color: Theme.of(context).dialogBackgroundColor
               ),
               child: Padding(
                 padding:
@@ -49,21 +49,23 @@ class AboutAppPage extends StatelessWidget {
                   style: GoogleFonts.manrope(
                     fontSize: 25,
                     fontWeight: FontWeight.w800,
-                    color: Colors.black,
+                    color: Theme.of(context).primaryColor,
                   ),
                 ),
               ),
             )),
         bottomSheet: Container(
-          color: Color(0xFFE2EBFF),
+          color: Theme.of(context).dialogBackgroundColor,
           height: height,
           child: Neumorphic(
             style: NeumorphicStyle(
                 boxShape:
-                NeumorphicBoxShape.roundRect(BorderRadius.circular(30)),
+                // NeumorphicBoxShape.roundRect(BorderRadius.circular(30)),
+                NeumorphicBoxShape.roundRect(BorderRadius.vertical(top: Radius.circular(30))),
+
                 depth: 7,
                 lightSource: LightSource.bottom,
-                color: Color(0xFFE2EBFF)
+                color: Theme.of(context).dialogBackgroundColor
             ),
             child: Center(
                 child: Column(
@@ -72,19 +74,19 @@ class AboutAppPage extends StatelessWidget {
                     Text('by NM4ik', style: GoogleFonts.manrope(
                       fontWeight: FontWeight.w800,
                       fontSize: 22,
-                      color: Colors.black
+                      color: Theme.of(context).primaryColor
                     ),),
                     SizedBox(height: 8,),
                     Text('Версия 1.0', style: GoogleFonts.manrope(
                         fontWeight: FontWeight.w800,
                         fontSize: 12,
-                        color: Colors.black
+                        color: Theme.of(context).primaryColor
                     ),),
                     SizedBox(height: 4,),
                     Text('от 30 сентября 2021', style: GoogleFonts.manrope(
                         fontWeight: FontWeight.w800,
                         fontSize: 12,
-                        color: Colors.black
+                        color: Theme.of(context).primaryColor
                     ),),
 
                     Expanded(
@@ -93,7 +95,7 @@ class AboutAppPage extends StatelessWidget {
                         child: Text('2021', style: GoogleFonts.manrope(
                             fontWeight: FontWeight.w800,
                             fontSize: 12,
-                            color: Colors.black
+                            color: Theme.of(context).primaryColor
                         ),),
                       ),
                     ),

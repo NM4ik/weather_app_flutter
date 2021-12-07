@@ -22,7 +22,7 @@ class _SlidingUpDateWidgetState extends State<SlidingUpDateWidget> {
         child: Text(dateNow , style: GoogleFonts.manrope(
           fontWeight: FontWeight.w600,
           fontSize: 18,
-          color: Colors.black
+          color: Theme.of(context).primaryColor
         ),),
       ),
     );

@@ -36,7 +36,7 @@ class _SlidingUpPanelWidgetState extends State<SlidingUpPanelWidget> {
         )),
       ),
       borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
-      color: Color(0xFFE2EBFF),
+      color: Theme.of(context).dialogBackgroundColor,
       onPanelClosed: () {
         context.read<isVisibleProvider>().panelClose();
       },

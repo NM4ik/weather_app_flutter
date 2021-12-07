@@ -17,7 +17,7 @@ class _ForecastWeekState extends State<ForecastWeek> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFE2EBFF),
+      backgroundColor: Theme.of(context).dialogBackgroundColor,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -29,7 +29,7 @@ class _ForecastWeekState extends State<ForecastWeek> {
                   style: GoogleFonts.manrope(
                     fontSize: 24,
                     fontWeight: FontWeight.w600,
-                    color: Colors.black,
+                    color: Theme.of(context).primaryColor,
                   ),
                 ),
               ),

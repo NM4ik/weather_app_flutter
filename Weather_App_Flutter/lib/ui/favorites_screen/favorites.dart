@@ -15,22 +15,22 @@ class FavoritesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       // backgroundColor: Colors.transparent,
-      backgroundColor: Color(0xFFE2EBFF),
+      backgroundColor: Theme.of(context).dialogBackgroundColor,
       appBar: AppBar(
         title: Text(
           "Избранные",
           style: GoogleFonts.manrope(
             fontWeight: FontWeight.w600,
             fontSize: 20,
-            color: Colors.black,
+            color: Theme.of(context).primaryColor,
           ),
         ),
-        backgroundColor: Color(0xFFE2EBFF),
+        backgroundColor: Theme.of(context).dialogBackgroundColor,
         elevation: 0,
         leading: IconButton(
           icon: SvgPicture.asset(
             ("assets/images/iconBack.svg"),
-            color: Colors.black,
+            color: Theme.of(context).primaryColor,
           ),
           onPressed: () => Navigator.of(context).pop(),
         ),

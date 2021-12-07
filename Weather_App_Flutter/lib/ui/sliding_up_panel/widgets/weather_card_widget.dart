@@ -14,7 +14,7 @@ class WeatherCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Neumorphic(
       style: NeumorphicStyle(
-        color: Color(0xFFE0E9FD),
+        color: Theme.of(context).dialogBackgroundColor,
         depth: 5,
         intensity: 0.4,
         lightSource: LightSource.topLeft,
@@ -30,7 +30,7 @@ class WeatherCard extends StatelessWidget {
               Text(
                 time,
                 style: GoogleFonts.manrope(
-                    color: Colors.black,
+                    color: Theme.of(context).primaryColor,
                     fontWeight: FontWeight.w400,
                     fontSize: 17),
               ),
@@ -41,7 +41,7 @@ class WeatherCard extends StatelessWidget {
               Text(
                 response,
                 style: GoogleFonts.manrope(
-                    color: Colors.black,
+                    color: Theme.of(context).primaryColor,
                     fontWeight: FontWeight.w400,
                     fontSize: 17),
               ),

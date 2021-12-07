@@ -60,7 +60,7 @@ class DetailWeatherElements extends StatelessWidget {
                           .watch<SettingProvider>()
                           .settingMap["Сила ветра"] == 0 ? 'м/c' : 'км/ч',
                       iconName: 'wind_speed.svg'),
-                  // SizedBox(width: 20,),
+                  SizedBox(width: 20,),
                   WeatherDetailCard(
                       response: context
                           .watch<SettingProvider>()

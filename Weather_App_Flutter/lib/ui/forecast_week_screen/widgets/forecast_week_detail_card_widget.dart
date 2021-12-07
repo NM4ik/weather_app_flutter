@@ -15,18 +15,18 @@ class ForecastWeekDetailCard extends StatelessWidget {
         // mainAxisAlignment: MainAxisAlignment.center,
         // crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SvgPicture.asset('assets/images/$icon'),
+          SvgPicture.asset('assets/images/$icon', color: Theme.of(context).primaryColor,),
           const SizedBox(width: 2,),
           Text(value, style: GoogleFonts.manrope(  //data quantity
             fontSize: 16,
             fontWeight: FontWeight.w600,
-            color: Colors.black,
+            color: Theme.of(context).primaryColor,
           ),),
           const SizedBox(width: 2,),
           Text(typeOfValue, style: GoogleFonts.manrope(  //signature for data
             fontSize: 16,
             fontWeight: FontWeight.w600,
-            color: const Color(0xFF5A5A5A),
+            color: Theme.of(context).primaryColor,
           ),),
         ],
       ),

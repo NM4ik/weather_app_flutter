@@ -10,28 +10,28 @@ class SettingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFE2EBFF),
+      backgroundColor: Theme.of(context).dialogBackgroundColor,
       appBar: AppBar(
         title: Text(
           "Настройки",
           style: GoogleFonts.manrope(
             fontWeight: FontWeight.w600,
             fontSize: 20,
-            color: Colors.black,
+            color: Theme.of(context).primaryColor,
           ),
         ),
-        backgroundColor: Color(0xFFE2EBFF),
+        backgroundColor: Theme.of(context).dialogBackgroundColor,
         elevation: 0,
         leading: IconButton(
           icon: SvgPicture.asset(
             ("assets/images/iconBack.svg"),
-            color: Colors.black,
+            color: Theme.of(context).primaryColor,
           ),
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
       body: Container(
-          color: Color(0xFFE2EBFF),
+          color: Theme.of(context).dialogBackgroundColor,
           child: Padding(
             padding: const EdgeInsets.only(top: 10.0),
             child: Column(
@@ -44,7 +44,7 @@ class SettingPage extends StatelessWidget {
                     style: GoogleFonts.manrope(
                       fontSize: 10,
                       fontWeight: FontWeight.w600,
-                      color: Color(0xFF828282),
+                      color: Theme.of(context).primaryColor,
                     ),
                   ),
                 ),
@@ -55,7 +55,7 @@ class SettingPage extends StatelessWidget {
                         NeumorphicBoxShape.roundRect(BorderRadius.circular(12)),
                     depth: 3,
                     lightSource: LightSource.top,
-                    color: Color(0xFFE2EBFF),
+                    color: Theme.of(context).dialogBackgroundColor,
                   ),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 13),

@@ -20,7 +20,7 @@ class _FavoritesCardWidgetState extends State<FavoritesCardWidget> {
       child: Container(
         child: Neumorphic(
           style: NeumorphicStyle(
-            color: Color(0xFFDEE9FF),
+            color: Theme.of(context).dialogBackgroundColor,
             depth: -5,
             lightSource: LightSource.top,
           ),
@@ -35,7 +35,7 @@ class _FavoritesCardWidgetState extends State<FavoritesCardWidget> {
                     child: Text(context.watch<SearchList>().favorites[widget.index].toString(), style: GoogleFonts.manrope(
                       fontWeight: FontWeight.w600,
                       fontSize: 13,
-                      color: Colors.black
+                      color: Theme.of(context).primaryColor
                     ),),
                   ),
                   onTap: () {
@@ -49,11 +49,11 @@ class _FavoritesCardWidgetState extends State<FavoritesCardWidget> {
                 Container(
                   child: Neumorphic(
                     style: NeumorphicStyle(
-                      color: Color(0xFFC8DAFF),
+                      color: Theme.of(context).highlightColor,
                     ),
                     child: IconButton(
                       padding: EdgeInsets.zero,
-                      icon: Icon(Icons.close, color: Colors.black),
+                      icon: Icon(Icons.close, color: Theme.of(context).primaryColor),
                       onPressed: () {
                         // print(Provider.of<SearchList>(context, listen: false).favorites[index]);
                         Provider.of<SearchList>(context, listen: false).popCityFromFavorites(Provider.of<SearchList>(context, listen: false).favorites[widget.index].toString());

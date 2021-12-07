@@ -11,15 +11,16 @@ class FullWeekButton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(30.0),
       child: RaisedButton(
-        color: Color(0xFFE2EBFF),
+        color: Theme.of(context).dialogBackgroundColor,
         textColor: Color(0xFF038CFE),
         shape: StadiumBorder(
-          side: BorderSide(color: Color(0xFF038CFE), width: 1),
+          side: BorderSide(color: Theme.of(context).hintColor, width: 1),
         ),
         onPressed: () {
           Navigator.of(context).push(MaterialPageRoute(builder: (context) => ForecastWeek()));
         },
         child: Text('Прогноз на неделю', style: GoogleFonts.manrope(
+          color: Theme.of(context).hintColor,
           fontSize: 14,
           fontWeight: FontWeight.w500,
         ),),

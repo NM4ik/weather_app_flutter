@@ -13,7 +13,7 @@ class StickSliding extends StatelessWidget {
       child: GestureDetector(
         child: Container(
           decoration: BoxDecoration(
-            color: Color(0xFF038CFE),
+            color: Theme.of(context).hintColor,
             borderRadius: BorderRadius.circular(5),
           ),
           width: 60, //60px

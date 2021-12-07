@@ -23,7 +23,7 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFE2EBFF),
+      backgroundColor: Theme.of(context).dialogBackgroundColor,
       appBar: AppBar(
         title: TextField(
           onSubmitted: (value) {
@@ -51,7 +51,7 @@ class _SearchPageState extends State<SearchPage> {
           style: GoogleFonts.manrope(
             fontSize: 13,
             fontWeight: FontWeight.w600,
-            color: Colors.black,
+            color: Theme.of(context).primaryColor,
           ),
           cursorColor: Colors.black,
         ),
@@ -60,7 +60,7 @@ class _SearchPageState extends State<SearchPage> {
             padding: EdgeInsets.zero,
             icon: Icon(
               Icons.close,
-              color: Colors.black,
+              color: Theme.of(context).primaryColor,
               size: 20,
             ),
             onPressed: () {
@@ -69,12 +69,12 @@ class _SearchPageState extends State<SearchPage> {
             iconSize: 30,
           )
         ],
-        backgroundColor: Color(0xFFE2EBFF),
+        backgroundColor: Theme.of(context).dialogBackgroundColor,
         elevation: 0,
         leading: IconButton(
           icon: SvgPicture.asset(
             ("assets/images/iconBack.svg"),
-            color: Colors.black,
+            color: Theme.of(context).primaryColor,
           ),
           onPressed: () => Navigator.of(context).pop(),
         ),

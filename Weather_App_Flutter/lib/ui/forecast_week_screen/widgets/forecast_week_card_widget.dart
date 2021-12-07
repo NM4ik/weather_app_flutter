@@ -22,13 +22,13 @@ class _ForecastWeekCardWidgetState extends State<ForecastWeekCardWidget> {
     return ClipRRect(
         borderRadius: BorderRadius.circular(20),
         child: Container(
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
               gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: <Color>[
-              Color(0xffCDDAF5),
-              Color(0xff9CBCFF),
+              Theme.of(context).dialogBackgroundColor,
+              Theme.of(context).highlightColor
             ],
             tileMode: TileMode.repeated,
           )),
@@ -39,8 +39,6 @@ class _ForecastWeekCardWidgetState extends State<ForecastWeekCardWidget> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  // '23 сентября',
-                  // widget.index.toString(),
                   Provider.of<InitialFunc>(context)
                       .sevenDays[widget.index]
                       .time
@@ -48,7 +46,7 @@ class _ForecastWeekCardWidgetState extends State<ForecastWeekCardWidget> {
                   style: GoogleFonts.manrope(
                       fontSize: 24,
                       fontWeight: FontWeight.w600,
-                      color: Colors.black),
+                      color: Theme.of(context).primaryColor),
                 ),
                 SvgPicture.asset(
                   'assets/images/partly_cloudy.svg',
@@ -106,7 +104,7 @@ class _ForecastWeekCardWidgetState extends State<ForecastWeekCardWidget> {
                 ),
                 ForecastWeekDetailCard(
                   icon: "humidity.svg",
-                  value: Provider.of<InitialFunc>(context).sevenDays[widget.index].pressure.round().toString(),
+                  value: Provider.of<InitialFunc>(context).sevenDays[widget.index].humidity.round().toString(),
                   typeOfValue: '%',
                 ),
                 ForecastWeekDetailCard(
@@ -114,17 +112,16 @@ class _ForecastWeekCardWidgetState extends State<ForecastWeekCardWidget> {
                   value:
                       context.watch<SettingProvider>().settingMap["Давление"] ==
                               0
-                          ? Provider.of<InitialFunc>(context)
-                              .sevenDays[widget.index]
-                              .pressure
-                              .round()
-                              .toString()
-                          : (Provider.of<InitialFunc>(context)
+                          ? (Provider.of<InitialFunc>(context)
                                       .sevenDays[widget.index]
-                                      .wind_speed *
+                                      .pressure /
                                   1.3)
                               .round()
-                              .toString(),
+                              .toString() : Provider.of<InitialFunc>(context)
+                          .sevenDays[widget.index]
+                          .pressure
+                          .round()
+                          .toString(),
                   typeOfValue:
                       context.watch<SettingProvider>().settingMap["Давление"] ==
                               0

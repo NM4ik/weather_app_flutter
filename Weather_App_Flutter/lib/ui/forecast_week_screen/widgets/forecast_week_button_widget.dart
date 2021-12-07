@@ -11,10 +11,10 @@ class FarecastWeekButtonWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 40.0),
       child: RaisedButton(
-        color: Color(0xFFE2EBFF),
+        color: Theme.of(context).dialogBackgroundColor,
         textColor: Color(0xFF038CFE),
         shape: StadiumBorder(
-          side: BorderSide(color: Colors.black, width: 1),
+          side: BorderSide(color: Theme.of(context).hintColor, width: 1),
         ),
         onPressed: () {
           // Navigator.of(context).push(MaterialPageRoute(builder: (context) => Main()));
@@ -23,7 +23,7 @@ class FarecastWeekButtonWidget extends StatelessWidget {
         child: Text('Вернуться на главную', style: GoogleFonts.manrope(
           fontSize: 14,
           fontWeight: FontWeight.w500,
-          color: Colors.black,
+          color: Theme.of(context).hintColor,
         ),),
       ),
     );

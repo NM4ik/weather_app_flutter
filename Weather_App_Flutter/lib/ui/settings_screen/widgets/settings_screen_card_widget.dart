@@ -49,14 +49,14 @@ class _SettingsCardPageWidgetState extends State<SettingsCardPageWidget> {
                   style: GoogleFonts.manrope(
                     fontWeight: FontWeight.w600,
                     fontSize: 16,
-                    color: Colors.black,
+                    color: Theme.of(context).primaryColor,
                   ),
                 ),
                 Container(
                   child: NeumorphicToggle(
                     style: NeumorphicToggleStyle(
                       disableDepth: true,
-                      backgroundColor: const Color(0xffE2EBFF),
+                      backgroundColor: Theme.of(context).cardColor,
                       borderRadius: BorderRadius.circular(15),
                     ),
                     width: 160,
@@ -67,7 +67,7 @@ class _SettingsCardPageWidgetState extends State<SettingsCardPageWidget> {
                             child: Text(
                               '$unit1',
                               style: GoogleFonts.manrope(
-                                color: Colors.black,
+                                color: Theme.of(context).primaryColor,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 12,
                               ),
@@ -77,7 +77,7 @@ class _SettingsCardPageWidgetState extends State<SettingsCardPageWidget> {
                             child: Text(
                               '$unit1',
                               style: GoogleFonts.manrope(
-                                color: Colors.white,
+                                color: Theme.of(context).primaryColor,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 11,
                               ),
@@ -88,7 +88,7 @@ class _SettingsCardPageWidgetState extends State<SettingsCardPageWidget> {
                           child: Text(
                             '$unit2',
                             style: GoogleFonts.manrope(
-                              color: Colors.black,
+                              color: Theme.of(context).primaryColor,
                               fontWeight: FontWeight.bold,
                               fontSize: 12,
                             ),
@@ -98,7 +98,7 @@ class _SettingsCardPageWidgetState extends State<SettingsCardPageWidget> {
                           child: Text(
                             '$unit2',
                             style: GoogleFonts.manrope(
-                              color: Colors.white,
+                              color: Theme.of(context).primaryColor,
                               fontWeight: FontWeight.bold,
                               fontSize: 11,
                             ),
@@ -107,8 +107,8 @@ class _SettingsCardPageWidgetState extends State<SettingsCardPageWidget> {
                       ),
                     ],
                     thumb: Container(
-                      decoration: const BoxDecoration(
-                        color: Color(0xff4B5F88),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).backgroundColor,
                       ),
                     ),
                     selectedIndex: toggleIndexes(Provider.of<SettingProvider>(context).settingMap, title),

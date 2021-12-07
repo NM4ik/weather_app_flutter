@@ -32,19 +32,19 @@ class _SearchEntityState extends State<SearchEntity> {
         context.watch<SearchList>().citises[widget.index],
         //   Provider.of<SearchList>(context).citises[index].name,
         style: GoogleFonts.manrope(
-            color: Colors.black,
+            color: Theme.of(context).primaryColor,
             fontSize: 13,
             fontWeight: FontWeight.w600),
       ),
       trailing: IconButton(
         icon: Provider.of<SearchList>(context).searchingForEmpty(context.watch<SearchList>().citises[widget.index])
-            ? const Icon(
+            ?  Icon(
           Icons.star,
-          color: Colors.black,
+          color: Theme.of(context).primaryColor,
         )
-            : const Icon(
+            :  Icon(
           Icons.star_border,
-          color: Colors.black,
+          color: Theme.of(context).primaryColor,
         ),
         onPressed: () {
           setState(() {

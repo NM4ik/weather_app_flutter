@@ -7,6 +7,7 @@ import 'package:weather_app_flutter/api/data_sevice.dart';
 import 'package:weather_app_flutter/api/models.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weather_app_flutter/provider/general_provider.dart';
+import 'package:weather_app_flutter/provider/settings_provider.dart';
 import 'package:weather_app_flutter/ui/splash/splash-loader.dart';
 import 'package:weather_app_flutter/ui/main_screen/widgets/app_bar_controller.dart';
 import 'package:weather_app_flutter/ui/navigation_drawer/navigation_drawer.dart';
@@ -39,7 +40,7 @@ class _MainState extends State<Main> {
                 Container(
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage("assets/images/background.jpg"),
+                      image: AssetImage(Provider.of<SettingProvider>(context).settingMap['Тема'] == 0 ? "assets/images/background.jpg" : "assets/images/background_black.jpg"),
                       fit: BoxFit.cover,
                     ),
                   ),
