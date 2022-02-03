@@ -1,12 +1,12 @@
-# This repository is used for training and creating pet projects on flutter.
+# weather_app
 
->WeatherApp. The app shows the weather in real time, for a week. You can find any city. Change the display settings of parameters such as: wind speed, pressure, degrees. And so on.
+>The app shows the weather in real time, for a week. You can find any city. Change the display settings of parameters such as: wind speed, pressure, degrees. And so on.
 
 
 1. MainScreen         
 2. Drawer
 3. Favorite cities
-4. About App!
+4. About App
 5. Forecast for week
 6. Settings
 7. Night Theme
