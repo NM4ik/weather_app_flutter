@@ -65,7 +65,7 @@ class DetailWeatherElements extends StatelessWidget {
                       response: context
                           .watch<SettingProvider>()
                           .settingMap["Давление"] ==
-                          0 ? response[0].pressure.round().toString() : (response[0].pressure * 1.3).round().toString(),
+                          0 ? (response[0].pressure / 1.3).round().toString() : (response[0].pressure).round().toString(),
                       type: context
                           .watch<SettingProvider>()
                           .settingMap["Давление"] == 0 ? 'мм.рт.ст' : 'гПа',
